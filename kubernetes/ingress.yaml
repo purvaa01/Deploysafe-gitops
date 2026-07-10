@@ -4,7 +4,7 @@ metadata:
   name: deploysafe-ingress
   namespace: deploysafe
 spec:
-  ingressClassName: nginx
+  ingressClassName: traefik
   rules:
     - host: deploysafe.local
       http:
