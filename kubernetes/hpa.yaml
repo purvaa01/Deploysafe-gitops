@@ -1,15 +1,18 @@
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: deploysafe-deployment
+  name: deploysafe-rollout
   namespace: deploysafe
+
 spec:
   scaleTargetRef:
-    apiVersion: apps/v1
-    kind: Deployment
-    name: deploysafe-deployment
+    apiVersion: argoproj.io/v1alpha1
+    kind: Rollout
+    name: deploysafe-rollout
+
   minReplicas: 1
   maxReplicas: 5
+
   metrics:
     - type: Resource
       resource:
