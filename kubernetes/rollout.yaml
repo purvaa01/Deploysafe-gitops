@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: deploysafe-container
-          image: purvaawankhede/deploysafe-app:e612b7c
+          image: purvaawankhede/deploysafe-app:a99ae47
 
           ports:
             - containerPort: 8000
