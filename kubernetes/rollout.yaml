@@ -1,0 +1,57 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: deploysafe-rollout
+  namespace: deploysafe
+
+spec:
+  replicas: 2
+
+  selector:
+    matchLabels:
+      app: deploysafe
+
+  template:
+    metadata:
+      labels:
+        app: deploysafe
+
+    spec:
+      containers:
+        - name: deploysafe-container
+          image: purvaawankhede/deploysafe-app:e612b7c
+
+          ports:
+            - containerPort: 8000
+
+          resources:
+            requests:
+              cpu: "200m"
+              memory: "256Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 2
+            failureThreshold: 3
+
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            timeoutSeconds: 2
+            failureThreshold: 3
+
+  strategy:
+    blueGreen:
+      activeService: deploysafe-service
+      previewService: deploysafe-preview-service
+      autoPromotionEnabled: false
