@@ -14,5 +14,5 @@ spec:
 
       provider:
         web:
-          url: http://deploysafe-preview:8000/health
+          url: http://deploysafe-preview-service/health
           timeoutSeconds: 5
