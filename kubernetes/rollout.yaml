@@ -54,4 +54,7 @@ spec:
     blueGreen:
       activeService: deploysafe-service
       previewService: deploysafe-preview-service
-      autoPromotionEnabled: false
+      autoPromotionEnabled: true
+      prePromotionAnalysis:
+        templates:
+          - templateName: deploysafe-health-check

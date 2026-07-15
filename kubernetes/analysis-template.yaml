@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AnalysisTemplate
+metadata:
+  name: deploysafe-health-check
+  namespace: deploysafe
+
+spec:
+  metrics:
+
+    - name: application-health
+      interval: 15s
+      count: 3
+      successCondition: result == "200"
+
+      provider:
+        web:
+          url: http://deploysafe-preview:8000/health
+          timeoutSeconds: 5
