@@ -6,13 +6,19 @@ metadata:
 
 spec:
   metrics:
-
     - name: application-health
-      interval: 15s
-      count: 3
-      successCondition: result == "200"
-
       provider:
-        web:
-          url: http://deploysafe-preview-service/health
-          timeoutSeconds: 5
+        job:
+          spec:
+            backoffLimit: 0
+            template:
+              spec:
+                restartPolicy: Never
+                containers:
+                  - name: curl
+                    image: curlimages/curl:8.8.0
+                    command:
+                      - sh
+                      - -c
+                      - |
+                        curl --fail http://deploysafe-preview-service:80/health
