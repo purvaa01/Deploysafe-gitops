@@ -4,10 +4,10 @@ metadata:
   name: deploysafe-service
   namespace: deploysafe
 spec:
-  type: ClusterIP
   selector:
     app: deploysafe
   ports:
-    - port: 80
+    - name: http
+      port: 80
       targetPort: 8000
-
+  type: ClusterIP
