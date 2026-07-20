@@ -16,6 +16,7 @@ spec:
 
           labels:
             severity: critical
+            app: deploysafe
 
           annotations:
             summary: "DeploySafe is Down"
