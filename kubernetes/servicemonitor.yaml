@@ -13,5 +13,5 @@ spec:
 
   endpoints:
     - port: http
-      path: /metrics
+      path: /metrics-test
       interval: 15s
