@@ -1,0 +1,22 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: deploysafe-alerts
+  namespace: deploysafe
+  labels:
+    release: prometheus
+
+spec:
+  groups:
+    - name: deploysafe.rules
+      rules:
+        - alert: DeploySafeDown
+          expr: up{job="deploysafe-service"} == 0
+          for: 1m
+
+          labels:
+            severity: critical
+
+          annotations:
+            summary: "DeploySafe is Down"
+            description: "Prometheus cannot scrape the DeploySafe application for more than 1 minute."
